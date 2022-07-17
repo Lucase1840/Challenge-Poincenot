@@ -1,13 +1,14 @@
 import React from 'react';
-import { Routes, Route, useLocation } from "react-router-dom";
-import ToDoList from "./components/ToDoList/ToDoList.jsx"
+import { Routes, Route } from "react-router-dom";
+import ToDo from "./components/ToDo/ToDo.jsx"
 import './App.css';
 
+// console.log(process.env.REACT_APP_URL)
 function App() {
   return (
     <div className="App">
       <Routes>
-      <Route path='/' element={<ToDoList/>} />
+        <Route path='/pcnt/todo-list' element={<ToDo />} />
       </Routes>
     </div>
   );
