@@ -1,16 +1,18 @@
-import { React } from "react";
+import React from "react";
 import { ReactComponent as NewItemIcon } from "../../public/newItemIcon.svg"
 import ToDoItem from "../ToDoItem/ToDoItem.jsx"
 
-export default function ToDoList({ toDoList, deleteItem, changeToDoStatus, filterToDos }) {
+export default function ToDoList({ toDoList, deleteItem, changeToDoStatus, filterToDos, setIsOpen }) {
     const userId = window.localStorage.getItem('userId');
     return (
         <div>
             <div className="flex flex-row">
-                <h3>To Do list</h3>
-                <label>
-                    <NewItemIcon />
-                </label>
+                <div onClick={() => setIsOpen(true)}>
+                    <h3>To Do list</h3>
+                    <label>
+                        <NewItemIcon />
+                    </label>
+                </div>
                 <select>
                     <option value='all'>Todos</option>
                     <option value='unCompleted'>No Realizados</option>

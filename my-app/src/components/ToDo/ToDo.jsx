@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { ReactComponent as ReactLogo } from "../../public/pcnt-logo.svg"
 import ToDoList from "../ToDoList/ToDoList.jsx"
-import { createUser, getToDos, addToDo, deleteToDo, changeStatus, filterToDoList } from "../../redux/actions.js"
+import Modal from "../Modal/Modal.jsx"
+import { createUser, getToDos, addToDo, deleteToDo, changeStatus, filterToDoList, resetToDos } from "../../redux/actions.js"
 
 export default function ToDo() {
     const dispatch = useDispatch();
@@ -10,6 +11,7 @@ export default function ToDo() {
     const stateToDos = useSelector(state => state.toDos)
     const input = useRef(null)
     const [toDosList, setToDoList] = useState([])
+    const [modalState, setModalState] = useState(false)
     let toDoItems = true;
 
     const addItem = () => {
@@ -29,6 +31,13 @@ export default function ToDo() {
         dispatch(filterToDoList(filterOption, userId))
     }
 
+    const resetList = (userId) => {
+        dispatch(resetToDos(userId))
+    };
+
+    const setIsOpen = (state) => {
+        setModalState(state)
+    }
     useEffect(() => {
         if (!user) {
             dispatch(createUser())
@@ -47,13 +56,14 @@ export default function ToDo() {
     return (
         <div className="flex flex-col items-center">
             <ReactLogo />
-            {toDoItems ? <h1>To do list</h1> : ""}
-            <h3>¿Qué cosas tenés que terminar hoy?</h3>
+            <h1>To do list</h1>
+            {toDoItems ? <h3>¿Qué cosas tenés que terminar hoy?</h3> : ""}
             <input placeholder="Escribí un item" className="Condicional" ref={input}></input>
             <br></br>
-            <ToDoList toDoList={toDosList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} filterToDos={filterToDos} />
+            <ToDoList toDoList={toDosList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} filterToDos={filterToDos} setIsOpen={setIsOpen} />
             <br></br>
             <button onClick={addItem}>Agregar</button>
+            {modalState && <Modal setIsOpen={setIsOpen} resetList={resetList} />}
         </div>
     )
 }

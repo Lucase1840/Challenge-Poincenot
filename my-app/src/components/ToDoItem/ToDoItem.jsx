@@ -1,3 +1,4 @@
+import React from "react";
 import { ReactComponent as Tick } from "../../public/tick.svg"
 
 
