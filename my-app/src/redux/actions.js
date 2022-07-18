@@ -3,6 +3,7 @@ export const CREATE_USER = "GET_PRODUCTS";
 export const GET_TODOS = "GET_TODOS";
 export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
+export const CHANGE_STATUS = "CHANGE_STATUS";
 
 const URL = "https://api-3sxs63jhua-uc.a.run.app/v1"
 
@@ -46,9 +47,22 @@ export function addToDo(newItem, userId) {
 export function deleteToDo(id, userId) {
   return function (dispatch) {
     return axios.delete(`${URL}/todo/${userId}`, { data: { todoId: id } })
-      .then(resp =>
+      .then(() =>
         dispatch({ type: DELETE_TODO, payload: id }))
       .catch(error => console.log(error.message))
   }
 };
 
+export function changeStatus(id, currentStatus, userId) {
+  return function (dispatch) {
+    const data = {
+      completed: currentStatus ? false : true,
+      todoId: id
+    }
+    return axios.put(`${URL}/todo/${userId}`, data)
+      .then(resp => {
+        dispatch({ type: CHANGE_STATUS, payload: id })
+      })
+      .catch(error => console.log(error.message))
+  }
+};

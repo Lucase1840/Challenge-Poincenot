@@ -2,7 +2,7 @@ import { React } from "react";
 import { ReactComponent as NewItemIcon } from "../../public/newItemIcon.svg"
 import ToDoItem from "../ToDoItem/ToDoItem.jsx"
 
-export default function ToDoList({ toDoList, deleteItem }) {
+export default function ToDoList({ toDoList, deleteItem, changeToDoStatus }) {
     return (
         <div>
             <div className="flex flex-row">
@@ -17,7 +17,7 @@ export default function ToDoList({ toDoList, deleteItem }) {
                 </select>
             </div>
             <div>
-                <ToDoItem toDoList={toDoList} deleteItem={deleteItem} />
+                <ToDoItem toDoList={toDoList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} />
             </div>
         </div >
     )
