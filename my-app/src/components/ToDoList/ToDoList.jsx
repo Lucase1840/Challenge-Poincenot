@@ -5,28 +5,30 @@ import ToDoItem from "../ToDoItem/ToDoItem.jsx"
 export default function ToDoList({ toDoList, deleteItem, changeToDoStatus, filterToDos, setIsOpen }) {
     const userId = window.localStorage.getItem('userId');
     return (
-        <div>
-            <div className="flex flex-row">
-                <div onClick={() => setIsOpen(true)}>
-                    <h3>To Do list</h3>
-                    <label>
-                        <NewItemIcon />
-                    </label>
+        <div className="flex-col bg-white rounded-xl p-2 relative">
+            <div className="flex justify-between p-2">
+                <div className="flex justify-start">
+                    <div className="flex flex-row" onClick={() => setIsOpen(true)}>
+                        <h3 className="font-bold mr-2">To Do list</h3>
+                        <label className="font-bold mt-1">
+                            <NewItemIcon />
+                        </label>
+                    </div>
                 </div>
-                <select>
-                    <option value='all'>Todos</option>
-                    <option value='unCompleted'>No Realizados</option>
-                    <option value='completed'>Realizados</option>
-                </select>
+                <div className="flex flex-col justify-end ">
+                    <button className="peer px-5 py-2 bg-green-600 hover:bg-green-700  text-white">Todos</button>
+                    <div className="hidden peer-hover:flex hover:block absolute bg-white drop-shadow-lg z-1 top-14 right-4">
+                        <div className="flex flex-col">
+                            <div className="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('', userId)}>Todos</div>
+                            <div className="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('true', userId)} > No Realizados</div>
+                            <div className="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('false', userId)} > Realizados</div>
+
+                        </div>
+
+                    </div>
+                </div>
             </div>
-            <div>
-                <button class="peer px-5 py-2 bg-green-600 hover:bg-green-700 text-white">Dropdown</button>
-                <div class="hidden peer-hover:flex hover:flex w-[200px] flex-col bg-white drop-shadow-lg">
-                    <div class="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('', userId)}>Todos</div>
-                    <div class="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('true', userId)} > No Realizados</div>
-                    <div class="px-5 py-3 hover:bg-gray-200" onClick={() => filterToDos('false', userId)} > Realizados</div>
-                </div>
-            </div >
+
             <div>
                 <ToDoItem toDoList={toDoList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} />
             </div>
