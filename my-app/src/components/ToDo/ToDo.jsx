@@ -8,12 +8,12 @@ import { createUser, getToDos, addToDo, deleteToDo, changeStatus, filterToDoList
 export default function ToDo() {
     const dispatch = useDispatch();
     const user = window.localStorage.getItem('userId');
-    const stateToDos = useSelector(state => state.toDos)
-    const input = useRef(null)
-    const [toDosList, setToDoList] = useState([])
-    const [modalState, setModalState] = useState(false)
-    const [inputValue, setInputValue] = useState('')
-    const [filterOption, setfilterOption] = useState('')
+    const stateToDos = useSelector(state => state.toDos);
+    const input = useRef(null);
+    const [toDosList, setToDoList] = useState([]);
+    const [modalState, setModalState] = useState(false);
+    const [inputValue, setInputValue] = useState('');
+    const [filterOption, setfilterOption] = useState('');
 
     useEffect(() => {
         if (!user) {
@@ -62,7 +62,7 @@ export default function ToDo() {
 
     const handleInputChange = (e) => {
         setInputValue(e.target.value)
-    }
+    };
 
     return (
         <>
