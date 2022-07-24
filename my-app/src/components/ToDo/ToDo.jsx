@@ -23,11 +23,8 @@ export default function ToDo() {
         }
     }, [user, dispatch])
 
-    console.log(toDosList)
-
     useEffect(() => {
         setToDoList(stateToDos)
-        console.log('asd')
     }, [stateToDos, stateToDos.length])
 
     const addItem = () => {
@@ -74,7 +71,7 @@ export default function ToDo() {
                 <br></br>
                 {!modalState && stateToDos && stateToDos.length ? <ToDoList toDoList={toDosList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} filterToDos={filterToDos} setIsOpen={setIsOpen} optionSelected={filterOption} /> : ''}
                 <br></br>
-                <button className={inputValue ? `absolute bottom-10 text-white bg-black w-[80%] p-3 rounded-full drop-shadow-lg` : `absolute bottom-10 text-gray-500 bg-white w-[80%] p-3 rounded-full`} onClick={addItem}>Agregar</button>
+                <button name="addButton" className={inputValue ? `absolute bottom-10 text-white bg-black w-[80%] p-3 rounded-full drop-shadow-lg` : `absolute bottom-10 text-gray-500 bg-white w-[80%] p-3 rounded-full`} onClick={addItem}>Agregar</button>
             </div>
             {modalState && <Modal setIsOpen={setIsOpen} resetList={resetList} />}
         </>
