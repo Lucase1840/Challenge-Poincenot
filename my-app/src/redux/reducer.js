@@ -1,7 +1,8 @@
 import {
   GET_TODOS,
   ADD_TODO,
-  DELETE_TODO
+  DELETE_TODO,
+  CHANGE_STATUS
 } from "./actions"
 
 const initialState = {
@@ -19,6 +20,19 @@ export function rootReducer(state = initialState, { type, payload }) {
     case DELETE_TODO:
       let filteredToDos = state.toDos.filter(e => e.id !== payload)
       return { ...state, toDos: filteredToDos }
+
+    case CHANGE_STATUS:
+      let ToDoWithStatusChanged = state.toDos.map(e => {
+        if (e.id === payload) {
+          return (e = {
+            ...e,
+            completed: e.completed ? false : true
+          })
+        } else {
+          return e;
+        }
+      })
+      return { ...state, toDos: ToDoWithStatusChanged }
 
     default: return state;
   }

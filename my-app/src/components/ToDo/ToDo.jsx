@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux"
 import { ReactComponent as ReactLogo } from "../../public/pcnt-logo.svg"
 import ToDoList from "../ToDoList/ToDoList.jsx"
-import { createUser, getToDos, addToDo, deleteToDo } from "../../redux/actions.js"
+import { createUser, getToDos, addToDo, deleteToDo, changeStatus } from "../../redux/actions.js"
 
 export default function ToDo() {
     const dispatch = useDispatch();
@@ -20,6 +20,11 @@ export default function ToDo() {
         dispatch(deleteToDo(id, userId))
     };
 
+    const changeToDoStatus = (id, currentStatus, userId, elementId) => {
+        document.getElementById(elementId).setAttribute('class', !currentStatus ? "flex bg-black rounded-xl" : "flex bg-red-500 rounded-xl")
+        dispatch(changeStatus(id, currentStatus, userId))
+    };
+
     useEffect(() => {
         if (!user) {
             dispatch(createUser())
@@ -31,7 +36,8 @@ export default function ToDo() {
     console.log(toDosList)
 
     useEffect(() => {
-        setToDoList([...stateToDos])
+        setToDoList(stateToDos)
+        console.log('asd')
     }, [stateToDos, stateToDos.length])
 
     return (
@@ -41,7 +47,7 @@ export default function ToDo() {
             <h3>¿Qué cosas tenés que terminar hoy?</h3>
             <input placeholder="Escribí un item" className="Condicional" ref={input}></input>
             <br></br>
-            <ToDoList toDoList={toDosList} deleteItem={deleteItem} />
+            <ToDoList toDoList={toDosList} deleteItem={deleteItem} changeToDoStatus={changeToDoStatus} />
             <br></br>
             <button onClick={addItem}>Agregar</button>
         </div>
