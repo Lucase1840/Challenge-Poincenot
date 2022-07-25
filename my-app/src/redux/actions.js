@@ -5,6 +5,7 @@ export const ADD_TODO = "ADD_TODO";
 export const DELETE_TODO = "DELETE_TODO";
 export const CHANGE_STATUS = "CHANGE_STATUS";
 export const FILTER_TODOS = "FILTER_TODOS";
+export const RESET_TODOS = "RESET_TODOS";
 
 
 const URL = "https://api-3sxs63jhua-uc.a.run.app/v1"
@@ -74,6 +75,16 @@ export function filterToDoList(filterOption, userId) {
     return axios(`${URL}/todo/${userId}/${filterOption}`)
       .then(resp => {
         dispatch({ type: FILTER_TODOS, payload: resp.data })
+      })
+      .catch(error => console.log(error.message))
+  }
+};
+
+export function resetToDos(userId) {
+  return function (dispatch) {
+    return axios.delete(`${URL}/todo/${userId}/reset`)
+      .then(resp => {
+        dispatch({ type: RESET_TODOS })
       })
       .catch(error => console.log(error.message))
   }

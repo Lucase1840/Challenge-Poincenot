@@ -3,7 +3,8 @@ import {
   ADD_TODO,
   DELETE_TODO,
   CHANGE_STATUS,
-  FILTER_TODOS
+  FILTER_TODOS,
+  RESET_TODOS
 } from "./actions"
 
 const initialState = {
@@ -37,6 +38,9 @@ export function rootReducer(state = initialState, { type, payload }) {
 
     case FILTER_TODOS:
       return { ...state, toDos: payload }
+
+    case RESET_TODOS:
+      return { ...state, toDos: [] }
 
     default: return state;
   }
