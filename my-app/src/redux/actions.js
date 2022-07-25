@@ -7,7 +7,6 @@ export const CHANGE_STATUS = "CHANGE_STATUS";
 export const FILTER_TODOS = "FILTER_TODOS";
 export const RESET_TODOS = "RESET_TODOS";
 
-
 const URL = "https://api-3sxs63jhua-uc.a.run.app/v1"
 
 export function createUser() {
